@@ -1,29 +1,24 @@
 import { performance } from "perf_hooks";
 
-const measure = (
-  target: Object,
-  propertyKey: string,
-  descriptor: PropertyDescriptor
-) => {
-  const originalMethod = descriptor.value;
+function measure(target: Function, context) {
+  if (context.kind === "method") {
+    return function (...args: any[]) {
+      const start = performance.now()  
+      const result = target.apply(this, args)
+      const end = performance.now()
 
-  descriptor.value = function (...args) {
-    const start = performance.now();
-    const result = originalMethod.apply(this, args);
-    const finish = performance.now();
-    console.log(`Execution time: ${finish - start} milliseconds`);
-    return result;
-  };
-
-  return descriptor;
-};
+      console.log(`Execution time: ${end - start} milliseconds`)
+      return result
+    }
+  }
+}
 
 class Rocket {
   @measure
   launch() {
-    console.log("Launching in 3... 2... 1... 🚀");
+    console.log("Launching in 3... 2... 1... 🚀")
   }
 }
 
-const rocket = new Rocket();
-rocket.launch();
+const rocket = new Rocket()
+rocket.launch()
