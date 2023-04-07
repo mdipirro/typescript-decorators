@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node calculate-time.ts"
+    "start": "ts-node pre-conditions.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^13.13.5",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.9.2"
+    "@types/node": "^18.15.11",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13"
